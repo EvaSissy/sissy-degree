@@ -1,8 +1,0 @@
-@import "tailwindcss";
-
-body {
-    padding: 16px;
-    color: #FD15AB;
-    background: #000 url("/page-bg.png") repeat;
-    background-size: 495px 50px;
-}
