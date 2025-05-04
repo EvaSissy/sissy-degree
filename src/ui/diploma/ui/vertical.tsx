@@ -31,7 +31,7 @@ export const Vertical: FC<Props> = ({
       className="relative aspect-210/297 w-full bg-[#000]"
     >
       <div
-        className="absolute inset-0 p-64 bg-cover bg-no-repeat"
+        className="absolute inset-0 p-64 bg-cover bg-no-repeat text-black"
         style={{
           width: '2100px',
           height: '2970px',
