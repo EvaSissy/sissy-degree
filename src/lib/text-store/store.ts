@@ -7,8 +7,10 @@ interface TextState {
   text: string
   from: string
   position: string
+  picture: number
   actions: {
     setText: (key: keyof Omit<TextState, 'actions'>, value: string) => void
+    setPicture: (value: number) => void
   }
 }
 
@@ -19,10 +21,14 @@ const useTextStore = create<TextState>()((set) => ({
   text: 'За самые глубокие заглоты и пухлые губки',
   from: 'Кристина',
   position: 'Королева пик',
+  picture: 0,
   actions: {
     setText: (key, value) => {
       set({ [key]: value })
     },
+    setPicture: (value: number) => {
+      set({ picture: value })
+    }
   },
 }))
 
@@ -47,3 +53,5 @@ export const useFrom = () =>
 export const usePosition = () =>
   useTextStore((state) => state.position)
 
+export const usePicture = () =>
+  useTextStore((state) => state.picture)

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import {
   useFrom,
-  useName,
+  useName, usePicture,
   usePosition,
   useSubtitle,
   useText,
@@ -9,10 +9,9 @@ import {
   useTitle,
 } from '../../lib/text-store/store.ts'
 import { toPng } from 'html-to-image'
-import bgSrc from '@/assets/bg-1.png'
 
 export const Form: FC = () => {
-  const { setText } = useTextActions()
+  const { setText, setPicture } = useTextActions()
 
   const title = useTitle()
   const subtitle = useSubtitle()
@@ -20,6 +19,7 @@ export const Form: FC = () => {
   const text = useText()
   const from = useFrom()
   const position = usePosition()
+  const picture = usePicture()
 
   const handleClick = () => {
     setText('text', text)
@@ -27,14 +27,7 @@ export const Form: FC = () => {
     const diploma = document.getElementById('diploma')
 
     if(diploma) {
-      toPng(diploma, {
-        style: {
-          background: `url(${bgSrc}), #000`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'contain',
-        },
-        cacheBust: true
-      })
+      toPng(diploma, { cacheBust: true })
       .then((dataUrl) => {
         const link = document.createElement("a");
         link.download = "my-image-name.png";
@@ -49,6 +42,18 @@ export const Form: FC = () => {
 
   return (
     <div className="flex flex-col gap-4 bg-[#000] border border-[#FD15AB] rounded-2xl w-full p-4">
+      <label className="flex gap-2 flex-col">
+        <span>Картинка</span>
+        <select className="bg-white rounded-2xl p-2 !outline-none focus:border focus:border-[#FD15AB]" value={picture} onChange={(e) => setPicture(Number(e.target.value))}>
+          <option value={0}>Первая</option>
+          <option value={1}>Вторая</option>
+          <option value={2}>Третья</option>
+          <option value={3}>Четвертая</option>
+          <option value={4}>Пятая</option>
+          <option value={5}>Шестая</option>
+          <option value={6}>Седьмая</option>
+        </select>
+      </label>
       <label className="flex gap-2 flex-col">
         <span>Заголовок</span>
         <input className="bg-white rounded-2xl p-2 !outline-none focus:border focus:border-[#FD15AB]" value={title} onChange={(e) => setText('title', e.target.value)}/>
@@ -73,7 +78,7 @@ export const Form: FC = () => {
         <span>От кого:</span>
         <input className="bg-white rounded-2xl p-2 !outline-none focus:border focus:border-[#FD15AB]" value={from} onChange={(e) => setText('from', e.target.value)}/>
       </label>
-      <button className="bg-white rounded-2xl p-2" onClick={handleClick}>
+      <button className="bg-white rounded-2xl p-2 mt-8" onClick={handleClick}>
         Скачать
       </button>
     </div>

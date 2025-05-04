@@ -4,7 +4,7 @@ import { Form } from './ui/form'
 function App() {
 
   return (
-    <div className="ov flex flex-col gap-16 items-center max-w-xl mx-auto">
+    <div className="flex flex-col gap-16 items-center max-w-xl mx-auto">
       <Diploma />
       <Form />
     </div>
